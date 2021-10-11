@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { db } from './firebase';
+import { collection } from 'firebase/firestore';
+import CreateUser from './components/createUser';
+import UsersTable from './components/usersTable';
 
-function App() {
+const App = () => {
+
+  const usersCollectionRef = collection(db, "users");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="d-flex flex-column align-items-center p-2 bd-highlight">
+      <h1>Users Table - CRUD</h1>
+      <CreateUser collectionRef={usersCollectionRef} />
+      <UsersTable collectionRef={usersCollectionRef} db={db}/>
     </div>
   );
 }
